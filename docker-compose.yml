@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  # The Database Service
+  mysqldb:
+    image: mysql:8.0
+    container_name: tracker-mysql
+    ports:
+      - "3306:3306" # Maps localhost:3306 to container:3306
+    environment:
+      MYSQL_DATABASE: tracker_db
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - db_data:/var/lib/mysql # Persists data even if container stops
+    networks:
+      - tracker-network
+
+  # Optional: Add PHPMyAdmin to visualize DB in browser (Great for debugging)
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: tracker-db-admin
+    depends_on:
+      - mysqldb
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: mysqldb
+      MYSQL_ROOT_PASSWORD: rootpassword
+    networks:
+      - tracker-network
+
+volumes:
+  db_data:
+
+networks:
+  tracker-network:
+    driver: bridge
