@@ -29,7 +29,8 @@ public class Transaction {
 		
 	}
 	
-	public Transaction(String name, String description, BigDecimal amount, LocalDate date, String category) {
+	public Transaction(Long id, String name, String description, BigDecimal amount, LocalDate date, String category) {
+		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.amount = amount;
