@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 import com.financialTracker.FT.dto.TransactionDTO;
 import com.financialTracker.FT.model.Transaction;
 
-@Mapper
+@Mapper (componentModel = "spring")
 public interface TransactionMapper {
 	
 	//Map Entity to DTO
